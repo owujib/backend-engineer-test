@@ -19,9 +19,6 @@ Implement token-based authentication
 4. Error handling - Appropriate error codes and messages
 5. Security - Input validation and/or sanitization
 
-## Task Duration
-
-4 days
 
 ## Submission
 
