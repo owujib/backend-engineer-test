@@ -98,7 +98,7 @@ The API is deployed on Heroku and can be accessed at [http://18.130.138.176](htt
 
 You can find the Postman collection for testing the API at the following URL:
 
-[Postman Collection]([https://www.postman.com/owujib/workspace/public-workspace/collection/27213384-2a055288-4d51-4a76-93af-cc77e185894f?action=share&creator=27213384&active-environment=27213384-1004accb-7085-4041-931e-b3a15b7a2678](https://www.postman.com/bold-escape-470464/workspace/mainstack-be/collection/27213384-984fe1a4-a2f5-4353-8855-e2cb3fe68c00?action=share&creator=27213384&active-environment=27213384-bcefeaaf-a8e4-4e31-8d73-2a1cf774dec8)https://www.postman.com/bold-escape-470464/workspace/mainstack-be/collection/27213384-984fe1a4-a2f5-4353-8855-e2cb3fe68c00?action=share&creator=27213384&active-environment=27213384-bcefeaaf-a8e4-4e31-8d73-2a1cf774dec8])
+[Postman Collection](https://www.postman.com/owujib/workspace/public-workspace/collection/27213384-2a055288-4d51-4a76-93af-cc77e185894f?action=share&creator=27213384&active-environment=27213384-1004accb-7085-4041-931e-b3a15b7a2678](https://www.postman.com/bold-escape-470464/workspace/mainstack-be/collection/27213384-984fe1a4-a2f5-4353-8855-e2cb3fe68c00?action=share&creator=27213384&active-environment=27213384-bcefeaaf-a8e4-4e31-8d73-2a1cf774dec8)https://www.postman.com/bold-escape-470464/workspace/mainstack-be/collection/27213384-984fe1a4-a2f5-4353-8855-e2cb3fe68c00?action=share&creator=27213384&active-environment=27213384-bcefeaaf-a8e4-4e31-8d73-2a1cf774dec8)
 
 
 ---
