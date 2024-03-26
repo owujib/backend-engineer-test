@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  # mainstacktest:
+  #   image: mainstacktest
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 3000:3000
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mainstackdb_data:/data/db
+
+volumes:
+  mainstackdb_data:
