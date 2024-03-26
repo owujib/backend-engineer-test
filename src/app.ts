@@ -6,6 +6,7 @@ import productRoute from './routes/products.routes';
 import userRoute from './routes/user.routes';
 import globalErrorHandler from './middleware/globalErrorMiddleware';
 import mongoose from 'mongoose';
+import ApiExceptionHandler from './utils/ApiErrorHandler';
 process.env.TZ = 'Africa/Lagos';
 
 const app: Application = express();
@@ -31,6 +32,10 @@ app.use('/api/user', userRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({ data: 'Hello world' });
+});
+
+app.get('*', (req: Request, res: Response, next: NextFunction) => {
+  return next(new ApiExceptionHandler('Route not found or has been moved'));
 });
 
 app.use(globalErrorHandler);

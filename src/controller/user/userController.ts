@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import User, { IUser } from '../../models/User';
 import { omitProperties, validateRequest } from '../../helpers';
 import CartItem from '../../models/CartItem';
-import { UserAccountDto } from './dto/user.dto';
+import { AddToCart, UserAccountDto, UserLoginDto } from './dto/user.dto';
 import ApiExceptionHandler from '../../utils/ApiErrorHandler';
 import jwt from 'jsonwebtoken';
 import Products from '../../models/Products';
@@ -41,22 +41,25 @@ export const loginUser = async (
 ) => {
   try {
     const { email, password } = req.body;
-
-    const user: IUser | null = await User.findOne({ email });
+    const { value } = validateRequest(UserLoginDto, req.body);
+    const user: IUser | null = await User.findOne({ email: value.email });
     if (!user) {
       return next(
         new ApiExceptionHandler('Invalid Credentials Please Try Again', 400),
       );
     }
 
-    const isPasswordValid = await user.comparePassword(password, user.password);
+    const isPasswordValid = await user.comparePassword(
+      value.password,
+      user.password,
+    );
     if (!isPasswordValid) {
       return next(
         new ApiExceptionHandler('Invalid Credentials Please Try Again', 400),
       );
     }
 
-    res
+    return res
       .status(200)
       .json({ accessToken: createSignToken({ userId: user._id }) });
   } catch (error) {
@@ -70,9 +73,10 @@ export const getUserCart = async (
   next: NextFunction,
 ) => {
   try {
-    const userId = req.params.userId;
+    const userId = (<any>req).user?._id;
     const cartItems = await CartItem.find({ user: userId }).populate(
       'productId',
+      '-createAt -updatedAt',
     );
     return res.status(200).json({ data: cartItems });
   } catch (error) {
@@ -94,9 +98,9 @@ export const addToCart = async (
   next: NextFunction,
 ) => {
   try {
-    const { productId, quantity } = req.body;
+    const { value } = validateRequest(AddToCart, req.body);
 
-    const product = await Products.findById(productId);
+    const product = await Products.findById(value.productId);
     if (!product) {
       return next(
         new ApiExceptionHandler('No Record Found For The Given Data', 400),
@@ -104,19 +108,19 @@ export const addToCart = async (
     }
 
     let cartItem = await CartItem.findOne({
-      productId,
+      productId: value.productId,
       userId: (<any>req).user?._id,
     });
 
     if (!cartItem) {
       cartItem = new CartItem({
-        productId,
-        quantity,
+        productId: value.productId,
+        quantity: value.quantity,
         price: product.price,
         userId: (<any>req).user?._id,
       });
     } else {
-      cartItem.quantity += quantity;
+      cartItem.quantity += value.quantity;
     }
 
     await cartItem.save();

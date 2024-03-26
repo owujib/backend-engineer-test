@@ -13,3 +13,9 @@ export const UserLoginDto = Joi.object({
 }).options({
   abortEarly: false,
 });
+export const AddToCart = Joi.object({
+  productId: Joi.string().required(),
+  quantity: Joi.number().required(),
+}).options({
+  abortEarly: false,
+});
