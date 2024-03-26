@@ -16,13 +16,16 @@ export const authMiddleware = async (
         new ApiExceptionHandler('Authorization denied. No token provided', 403),
       );
     }
-    const decoded = jwt.verify(token, (<any>process.env).JWT_SECRET);
+    const decoded = jwt.verify(token, <any>process.env.JWT_SECRET!) as {
+      userId: string;
+    };
 
-    const user = await User.findById((<any>decoded).userId);
+    const user = await User.findById(decoded.userId);
+
     if (!user) {
       return next(new ApiExceptionHandler('Forbiden', 403));
     }
-    req.user = user;
+    (<any>req).user = user;
     return next();
   } catch (error) {
     return next(error);

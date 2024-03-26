@@ -15,7 +15,7 @@ const router: Router = express.Router();
 router.get('/', getAllProducts);
 router.get('/:productId', getProductById);
 
-router.use([authMiddleware, protectProductRoute]);
+router.use(authMiddleware, protectProductRoute);
 
 router.post('/', createProduct);
 router.put('/:productId', updateProduct);

@@ -103,14 +103,17 @@ export const addToCart = async (
       );
     }
 
-    let cartItem = await CartItem.findOne({ productId, userId: req.user?._id });
+    let cartItem = await CartItem.findOne({
+      productId,
+      userId: (<any>req).user?._id,
+    });
 
     if (!cartItem) {
       cartItem = new CartItem({
         productId,
         quantity,
         price: product.price,
-        userId: req.user?._id,
+        userId: (<any>req).user?._id,
       });
     } else {
       cartItem.quantity += quantity;
