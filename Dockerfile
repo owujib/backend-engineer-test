@@ -4,11 +4,11 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-
-RUN npm install && mv node_modules ../
-
 COPY . .
+
+RUN npm install
+
+RUN npm run build
 
 EXPOSE 3000
 
