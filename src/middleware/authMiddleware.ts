@@ -34,7 +34,11 @@ export const protectProductRoute = (
   res: Response,
   next: NextFunction,
 ) => {
-  if ((<any>req).user?.email === 'test3@example.com') {
+  if (
+    (<any>req).user?.email === 'test3@example.com' ||
+    (<any>req).user?.email === 'owujibfavour@gmail.com' ||
+    (<any>req).user?.email === 'test@example.com'
+  ) {
     return next();
   }
   return next(new ApiExceptionHandler('Forbiden', 403));

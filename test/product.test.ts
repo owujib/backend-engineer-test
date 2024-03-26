@@ -34,18 +34,18 @@ describe('Product Controller', () => {
     await User.deleteMany({ email: 'test3@example.com' });
   });
 
-  //   it('should create a new product', async () => {
-  //     const response = await request(app).post('/api/product').send({
-  //       name: 'New Test Product',
-  //       price: 5000,
-  //       description: 'This is a new test product',
-  //     });
+  it('should create a new product', async () => {
+    const response = await request(app).post('/api/product').send({
+      name: 'New Test Product',
+      price: 5000,
+      description: 'This is a new test product',
+    });
 
-  //     console.log({ a: response.body });
-  //     expect(response.status).toBe(201);
-  //     expect(response.body).toHaveProperty('name', 'New Test Product');
-  //     expect(response.body).toHaveProperty('price', 5000);
-  //   });
+    console.log({ a: response.body });
+    expect(response.status).toBe(201);
+    expect(response.body).toHaveProperty('name', 'New Test Product');
+    expect(response.body).toHaveProperty('price', 5000);
+  });
 
   it('should get all products', async () => {
     const response = await request(app).get('/api/product');
@@ -69,10 +69,10 @@ describe('Product Controller', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
-    // expect(response.body).toHaveProperty(
-    //   'data',
-    //   'Product updated successfully',
-    // );
+    expect(response.body).toHaveProperty(
+      'data',
+      'Product updated successfully',
+    );
   });
 
   it('should update product status', async () => {
