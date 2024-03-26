@@ -74,10 +74,9 @@ export const getUserCart = async (
 ) => {
   try {
     const userId = (<any>req).user?._id;
-    const cartItems = await CartItem.find({ user: userId }).populate({
-      path: 'productId',
-      select: '-updatedAt -deletedAt -status',
-    });
+    const cartItems = await CartItem.find({ user: userId }).populate(
+      'productId',
+    );
     return res.status(200).json({ data: cartItems });
   } catch (error) {
     return next(error);

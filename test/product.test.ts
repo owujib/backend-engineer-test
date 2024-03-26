@@ -41,7 +41,6 @@ describe('Product Controller', () => {
       description: 'This is a new test product',
     });
 
-    console.log({ a: response.body });
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('name', 'New Test Product');
     expect(response.body).toHaveProperty('price', 5000);

@@ -20,6 +20,6 @@ router.use(authMiddleware, protectProductRoute);
 router.post('/', createProduct);
 router.put('/:productId', updateProduct);
 router.delete('/:productId', deleteProduct);
-router.put('/:productId/status', deleteProduct);
+router.put('/:productId/status', updatProductStatus);
 
 export default router;

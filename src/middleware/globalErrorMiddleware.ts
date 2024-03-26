@@ -53,7 +53,7 @@ const sendErrorDev = (
   // });
 
   return res.status(err.statusCode || 500).json({
-    status: err.status,
+    success: err.status,
     err,
     message: err.message,
     error: err.error,
@@ -68,7 +68,7 @@ const sendErrorProd = (
 ) => {
   if (err.message === 'Request Validation Error') {
     return res.status(err.statusCode).json({
-      status: err.status,
+      success: err.status,
       message: err.message,
       error: err.error,
     });
@@ -76,14 +76,14 @@ const sendErrorProd = (
 
   if (err.isOperational) {
     return res.status(err.statusCode).json({
-      status: err.status,
+      success: err.status,
       message: err.message,
       error: err.error,
     });
   }
 
   return res.status(500).json({
-    status: 'error',
+    success: false,
     message: 'Something went wrong! please contact support',
   });
 };
@@ -108,7 +108,7 @@ const globalErrorHandler = (
 
   let error: ApiExceptionHandler | any = {
     ...err,
-    status: err.status,
+    success: err.status,
     message: err.message,
     stack: err.stack,
     error: err.error,

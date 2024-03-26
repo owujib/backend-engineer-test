@@ -35,6 +35,20 @@ export const getAllProducts = async (
     return next(error);
   }
 };
+export const getAllInactiveProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const products: IProduct[] = await Product.find({
+      status: PRODUCT_STATUS_ENUM.IN_ACTIVE,
+    }).select('-createdAt -updatedAt -status');
+    res.status(200).json({ products });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 export const getProductById = async (
   req: Request,
